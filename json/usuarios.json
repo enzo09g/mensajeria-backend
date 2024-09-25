@@ -1,0 +1,14 @@
+[
+  {
+    "nombre": "Enzo",
+    "apellido": "Gomez",
+    "email": "email@email.com",
+    "contraseña": "hola"
+  },
+  {
+    "nombre": "Enzo",
+    "apellido": "Gomez",
+    "email": "1234",
+    "contraseña": "1234"
+  }
+  ]
