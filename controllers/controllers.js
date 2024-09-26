@@ -100,11 +100,27 @@ const send = (req, res) => {
 
 }
 
+const getChats = (req, res) => {
+    console.log(req.body)
+    fs.readFile('./json/usuarios.json', 'utf8', (err, archivo) => {
+        let contactos = []
+        const arrayArchivo = JSON.parse(archivo)
+        arrayArchivo.forEach(element => {
+            const { mensajes, contraseña, ...nuevoObjeto } = element;
+            contactos.push(nuevoObjeto)
+        })
+        contactos.sort((a, b) => a.nombre.localeCompare(b.nombre))
+        const contactosFiltrado = contactos.filter(element => element.email != req.body.email)
+        res.json(contactosFiltrado)
+    })
+}
+
 
 module.exports = {
     register,
     login,
     middleCheck,
     check,
-    send
+    send,
+    getChats
 }
