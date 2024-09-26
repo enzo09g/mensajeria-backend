@@ -1,14 +1,52 @@
 [
   {
-    "nombre": "Enzo",
-    "apellido": "Gomez",
-    "email": "email@email.com",
-    "contraseña": "hola"
+    "nombre": "Prueba",
+    "apellido": "Uno",
+    "email": "prueba1@email.com",
+    "contraseña": "1234",
+    "mensajes": {
+      "enviados": [],
+      "recibidos": []
+    }
+  },
+  {
+    "nombre": "Prueba",
+    "apellido": "Dos",
+    "email": "prueba2@email.com",
+    "contraseña": "1234",
+    "mensajes": {
+      "enviados": [],
+      "recibidos": []
+    }
   },
   {
     "nombre": "Enzo",
     "apellido": "Gomez",
-    "email": "1234",
-    "contraseña": "1234"
+    "email": "enzo@email.com",
+    "contraseña": "1234",
+    "mensajes": {
+      "enviados": [],
+      "recibidos": []
+    }
+  },
+  {
+    "nombre": "Ana",
+    "apellido": "Vlaeminck",
+    "email": "ana@email.com",
+    "contraseña": "1234",
+    "mensajes": {
+      "enviados": [],
+      "recibidos": []
+    }
+  },
+  {
+    "nombre": "Alex",
+    "apellido": "Gomez",
+    "email": "alex@email.com",
+    "contraseña": "1234",
+    "mensajes": {
+      "enviados": [],
+      "recibidos": []
+    }
   }
-  ]
+]

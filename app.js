@@ -1,7 +1,5 @@
 const express = require('express');
 const cors = require('cors')
-const jwt = require('jsonwebtoken')
-const secretKey = "Mi clave super ultra secreta"
 
 const app = express()
 
@@ -17,9 +15,10 @@ app.listen(port, () => {
 const register = require('./routes/register')
 const login = require('./routes/login')
 const check = require('./routes/check')
+const send = require('./routes/send')
 
 app.get('/', (req, res) => {
-    res.send("<h1>Funciona?</h1>")
+    res.send("<h1>Servidor</h1>")
 })
 
 app.use('/register', register)
@@ -27,3 +26,5 @@ app.use('/register', register)
 app.use('/login', login)
 
 app.use('/home', check)
+
+app.use('/send', send)
