@@ -68,6 +68,7 @@ const send = (req, res) => {
 
 
 
+
     fs.readFile(rutaJsonUsuarios, 'utf-8', (err, archivo) => {
         const jsonArchivo = JSON.parse(archivo);
 
@@ -78,17 +79,20 @@ const send = (req, res) => {
                 const aGuardar = JSON.stringify(jsonArchivo, null, 2)
                 fs.writeFile(rutaJsonUsuarios, aGuardar, (err) => {
                     if (err) {
+                        console.log("linea 83Error:" + err)
                         return res.status(500).json({ "Mensaje": "Error al guardar el archivo" })
                     }
+                    console.log("Mensaje agregado")
                     return res.status(200).json({ "Mensaje": "Mensaje agregado" });
                 })
-                break;
             }
             if (usuario.email == mensaje.emisor) {
                 usuario.mensajes.enviados.push(nuevoMensajeEnviado);
                 const aGuardar2 = JSON.stringify(jsonArchivo, null, 2)
                 fs.writeFile(rutaJsonUsuarios, aGuardar2, (err) => {
-                    console.log({ "Error": err })
+                    if (err) {
+                        console.log({ "Error": err })
+                    }
                 })
             }
         }
@@ -101,7 +105,6 @@ const send = (req, res) => {
 }
 
 const getChats = (req, res) => {
-    console.log(req.body)
     fs.readFile('./json/usuarios.json', 'utf8', (err, archivo) => {
         let contactos = []
         const arrayArchivo = JSON.parse(archivo)

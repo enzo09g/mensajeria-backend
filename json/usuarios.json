@@ -1,25 +1,5 @@
 [
   {
-    "nombre": "Prueba",
-    "apellido": "Uno",
-    "email": "prueba1@email.com",
-    "contraseña": "1234",
-    "mensajes": {
-      "enviados": [],
-      "recibidos": []
-    }
-  },
-  {
-    "nombre": "Prueba",
-    "apellido": "Dos",
-    "email": "prueba2@email.com",
-    "contraseña": "1234",
-    "mensajes": {
-      "enviados": [],
-      "recibidos": []
-    }
-  },
-  {
     "nombre": "Enzo",
     "apellido": "Gomez",
     "email": "enzo@email.com",
@@ -43,6 +23,16 @@
     "nombre": "Alex",
     "apellido": "Gomez",
     "email": "alex@email.com",
+    "contraseña": "1234",
+    "mensajes": {
+      "enviados": [],
+      "recibidos": []
+    }
+  },
+  {
+    "nombre": "Luciana",
+    "apellido": "Pereira",
+    "email": "luciana@email.com",
     "contraseña": "1234",
     "mensajes": {
       "enviados": [],
