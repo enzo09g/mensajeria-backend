@@ -11,6 +11,16 @@
           "emisor": "ana@email.com",
           "contenido": "dklfsñfas",
           "leido": false
+        },
+        {
+          "emisor": "bucher@email.com",
+          "contenido": "Esto anda?",
+          "leido": false
+        },
+        {
+          "emisor": "bucher@email.com",
+          "contenido": "Si o no?",
+          "leido": false
         }
       ]
     }
@@ -55,6 +65,25 @@
     "contraseña": "1234",
     "mensajes": {
       "enviados": [],
+      "recibidos": []
+    }
+  },
+  {
+    "nombre": "Billy",
+    "apellido": "Bucher",
+    "email": "bucher@email.com",
+    "contraseña": "1234",
+    "mensajes": {
+      "enviados": [
+        {
+          "receptor": "enzo@email.com",
+          "contenido": "Esto anda?"
+        },
+        {
+          "receptor": "enzo@email.com",
+          "contenido": "Si o no?"
+        }
+      ],
       "recibidos": []
     }
   }

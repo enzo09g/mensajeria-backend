@@ -13,12 +13,12 @@ app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`)
 })
 
-const register = require('./routes/register')
-const login = require('./routes/login')
-const check = require('./routes/check')
-const send = require('./routes/send');
-const getChats = require('./routes/getChats');
-const unreadMessagesCount = require('./routes/unreadMessagesCount')
+const register = require('../routes/register')
+const login = require('../routes/login')
+const check = require('../routes/check')
+const send = require('../routes/send');
+const getChats = require('../routes/getChats');
+const unreadMessagesCount = require('../routes/unreadMessagesCount')
 
 app.get('/', (req, res) => {
     res.send("<h1>Servidor</h1>")
@@ -35,3 +35,6 @@ app.use('/send', send)
 app.use('/get_chats', getChats)
 
 app.use('/unread_messages_count', unreadMessagesCount)
+
+
+module.exports = app
