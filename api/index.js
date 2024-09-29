@@ -10,12 +10,6 @@ app.use(cors({
     origin: 'https://mensajeria-front-end.vercel.app',
 }));
 
-const port = 3000;
-
-app.listen(port, () => {
-    console.log(`Servidor corriendo en http://localhost:${port}`)
-})
-
 const register = require('../routes/register')
 const login = require('../routes/login')
 const check = require('../routes/check')
