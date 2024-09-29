@@ -1,2 +1,3 @@
 # Ignorar la carpeta de módulos
 node_modules/
+.vercel
