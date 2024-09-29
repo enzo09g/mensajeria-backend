@@ -19,6 +19,7 @@ const check = require('../routes/check')
 const send = require('../routes/send');
 const getChats = require('../routes/getChats');
 const unreadMessagesCount = require('../routes/unreadMessagesCount')
+const getUsers = require('../routes/getUsers')
 
 app.get('/', (req, res) => {
     res.send("<h1>Servidor</h1>")
@@ -36,5 +37,6 @@ app.use('/get_chats', getChats)
 
 app.use('/unread_messages_count', unreadMessagesCount)
 
+app.use('/getUsers', getUsers)
 
 module.exports = app

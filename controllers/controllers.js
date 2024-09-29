@@ -66,7 +66,7 @@ const send = (req, res) => {
     const { emisor, ...nuevoMensajeEnviado } = req.body
     const rutaJsonUsuarios = './json/usuarios.json'
     let mensajeAgregado = false;
-    
+
 
     fs.readFile(rutaJsonUsuarios, 'utf-8', (err, archivo) => {
         const jsonArchivo = JSON.parse(archivo);
@@ -117,6 +117,10 @@ const getChats = (req, res) => {
     })
 }
 
+const getUsers = (req, res) => {
+    res.status(200).json('./json/usuarios.json')
+}
+
 const unreadMessages = (req, res) => {
     const ruta = './json/usuarios.json';
     const { email } = req.body;
@@ -150,5 +154,6 @@ module.exports = {
     check,
     send,
     getChats,
-    unreadMessages
+    unreadMessages,
+    getUsers
 }
