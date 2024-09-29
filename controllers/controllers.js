@@ -1,6 +1,7 @@
 const fs = require('fs');
 const jwt = require('jsonwebtoken')
 const secretKey = "Mi clave super ultra secreta"
+const usuarios = require('../json/usuarios.json')
 
 const register = (req, res) => {
     console.log(req.body)
@@ -118,7 +119,7 @@ const getChats = (req, res) => {
 }
 
 const getUsers = (req, res) => {
-    res.status(200).json('./json/usuarios.json')
+    res.status(200).json(usuarios)
 }
 
 const unreadMessages = (req, res) => {
