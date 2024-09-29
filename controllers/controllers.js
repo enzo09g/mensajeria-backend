@@ -28,7 +28,7 @@ const login = (req, res) => {
             archivoUsuarios.forEach(element => {
                 const { email, contraseña } = element;
                 if (email == data.email && contraseña == data.contraseña) {
-                    const token = jwt.sign({ email }, secretKey, { expiresIn: '3m' });
+                    const token = jwt.sign({ email }, secretKey, { expiresIn: '30m' });
                     const datos = { ...element, token: token }
 
                     console.log("Logrado");
@@ -65,9 +65,7 @@ const send = (req, res) => {
     const { emisor, ...nuevoMensajeEnviado } = req.body
     const rutaJsonUsuarios = './json/usuarios.json'
     let mensajeAgregado = false;
-
-
-
+    
 
     fs.readFile(rutaJsonUsuarios, 'utf-8', (err, archivo) => {
         const jsonArchivo = JSON.parse(archivo);
@@ -118,6 +116,31 @@ const getChats = (req, res) => {
     })
 }
 
+const unreadMessages = (req, res) => {
+    const ruta = './json/usuarios.json';
+    const { email } = req.body;
+    fs.readFile(ruta, 'utf8', (err, archivo) => {
+        let emailEncontrado = false;
+        let contador = 0
+        const jsonArchivo = JSON.parse(archivo)
+        for (let usuario of jsonArchivo) {
+            if (usuario.email == email) {
+                emailEncontrado = true;
+                for (let mensaje of usuario.mensajes.recibidos) {
+                    if (mensaje.leido == false) {
+                        contador++
+                    }
+                }
+                res.status(200).json({ "mensajesNoLeidos": contador })
+            }
+        }
+
+        if (!emailEncontrado) {
+            res.status(400).json({ "Mensaje": "Email no coincide" })
+        }
+    })
+}
+
 
 module.exports = {
     register,
@@ -125,5 +148,6 @@ module.exports = {
     middleCheck,
     check,
     send,
-    getChats
+    getChats,
+    unreadMessages
 }

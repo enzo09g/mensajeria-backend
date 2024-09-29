@@ -6,7 +6,13 @@
     "contraseña": "1234",
     "mensajes": {
       "enviados": [],
-      "recibidos": []
+      "recibidos": [
+        {
+          "emisor": "ana@email.com",
+          "contenido": "dklfsñfas",
+          "leido": false
+        }
+      ]
     }
   },
   {
@@ -15,7 +21,20 @@
     "email": "ana@email.com",
     "contraseña": "1234",
     "mensajes": {
-      "enviados": [],
+      "enviados": [
+        {
+          "receptor": "enzo@email.com",
+          "contenido": "dklfsñfas"
+        },
+        {
+          "receptor": "enzo@email.com",
+          "contenido": "dlfkdasfdsa"
+        },
+        {
+          "receptor": "enzo@email.com",
+          "contenido": "dfkdjlfdasñ\n"
+        }
+      ],
       "recibidos": []
     }
   },
