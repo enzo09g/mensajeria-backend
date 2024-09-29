@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const secretKey = "Mi clave super ultra secreta"
 
 const register = (req, res) => {
+    console.log(req.body)
     let data = req.body;
     data.mensajes = { "enviados": [], "recibidos": [] };
     fs.readFile('./json/usuarios.json', 'utf8', (err, archivo) => {
