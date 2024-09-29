@@ -8,6 +8,8 @@ app.use(express.json());
 
 app.use(cors({
     origin: 'https://mensajeria-front-end.vercel.app',
+    methods: ['GET', 'POST'],
+    credentials: true
 }));
 
 const register = require('../routes/register')
