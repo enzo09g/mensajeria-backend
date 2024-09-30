@@ -2,13 +2,89 @@
   {
     "nombre": "Enzo",
     "apellido": "Gomez",
-    "email": "email@email.com",
-    "contraseña": "hola"
+    "email": "enzo@email.com",
+    "contraseña": "1234",
+    "mensajes": {
+      "enviados": [],
+      "recibidos": [
+        {
+          "emisor": "ana@email.com",
+          "contenido": "dklfsñfas",
+          "leido": false
+        },
+        {
+          "emisor": "bucher@email.com",
+          "contenido": "Esto anda?",
+          "leido": false
+        },
+        {
+          "emisor": "bucher@email.com",
+          "contenido": "Si o no?",
+          "leido": false
+        }
+      ]
+    }
   },
   {
-    "nombre": "Enzo",
+    "nombre": "Ana",
+    "apellido": "Vlaeminck",
+    "email": "ana@email.com",
+    "contraseña": "1234",
+    "mensajes": {
+      "enviados": [
+        {
+          "receptor": "enzo@email.com",
+          "contenido": "dklfsñfas"
+        },
+        {
+          "receptor": "enzo@email.com",
+          "contenido": "dlfkdasfdsa"
+        },
+        {
+          "receptor": "enzo@email.com",
+          "contenido": "dfkdjlfdasñ\n"
+        }
+      ],
+      "recibidos": []
+    }
+  },
+  {
+    "nombre": "Alex",
     "apellido": "Gomez",
-    "email": "1234",
-    "contraseña": "1234"
+    "email": "alex@email.com",
+    "contraseña": "1234",
+    "mensajes": {
+      "enviados": [],
+      "recibidos": []
+    }
+  },
+  {
+    "nombre": "Luciana",
+    "apellido": "Pereira",
+    "email": "luciana@email.com",
+    "contraseña": "1234",
+    "mensajes": {
+      "enviados": [],
+      "recibidos": []
+    }
+  },
+  {
+    "nombre": "Billy",
+    "apellido": "Bucher",
+    "email": "bucher@email.com",
+    "contraseña": "1234",
+    "mensajes": {
+      "enviados": [
+        {
+          "receptor": "enzo@email.com",
+          "contenido": "Esto anda?"
+        },
+        {
+          "receptor": "enzo@email.com",
+          "contenido": "Si o no?"
+        }
+      ],
+      "recibidos": []
+    }
   }
-  ]
+]

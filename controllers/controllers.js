@@ -1,14 +1,16 @@
 const fs = require('fs');
 const jwt = require('jsonwebtoken')
 const secretKey = "Mi clave super ultra secreta"
+const usuarios = require('../json/usuarios.json')
 
 const register = (req, res) => {
-    const data = req.body;
+    console.log(req.body)
+    let data = req.body;
+    data.mensajes = { "enviados": [], "recibidos": [] };
     fs.readFile('./json/usuarios.json', 'utf8', (err, archivo) => {
         const archivoUsuarios = JSON.parse(archivo)
         archivoUsuarios.push(data);
         const jsonArchivos = JSON.stringify(archivoUsuarios, null, 2);
-
 
         fs.writeFile('./json/usuarios.json', jsonArchivos, () => {
             console.log("Logrado")
@@ -28,11 +30,12 @@ const login = (req, res) => {
             archivoUsuarios.forEach(element => {
                 const { email, contraseña } = element;
                 if (email == data.email && contraseña == data.contraseña) {
-                    const token = jwt.sign({ email }, secretKey, { expiresIn: '3m' });
+                    const token = jwt.sign({ email }, secretKey, { expiresIn: '30m' });
+                    const datos = { ...element, token: token }
 
                     console.log("Logrado");
                     usuarioEncontrado = true;
-                    res.status(200).json({ token })
+                    res.status(200).json(datos)
                 }
             })
 
@@ -47,13 +50,9 @@ const login = (req, res) => {
 
 const middleCheck = (req, res, next) => {
     try {
-        console.log(req.headers)
         const decoded = jwt.verify(req.headers['access-token'], secretKey)
-        console.log(decoded)
-        console.log("Llego aca y lo acepte")
         next()
     } catch (err) {
-        console.log("Llego aca y lo rechace")
         res.status(401).json({ "Error": "Usuario no autorizado" })
     }
 }
@@ -62,10 +61,100 @@ const check = (req, res) => {
     res.status(200).json({ "Mensaje": "Acceso autorizado" })
 }
 
+const send = (req, res) => {
+    const { receptor, ...mensaje } = req.body;
+    const nuevoMensajeRecibido = { ...mensaje, leido: false }
+    const { emisor, ...nuevoMensajeEnviado } = req.body
+    const rutaJsonUsuarios = './json/usuarios.json'
+    let mensajeAgregado = false;
+
+
+    fs.readFile(rutaJsonUsuarios, 'utf-8', (err, archivo) => {
+        const jsonArchivo = JSON.parse(archivo);
+
+        for (usuario of jsonArchivo) {
+            if (usuario.email == receptor) {
+                usuario.mensajes.recibidos.push(nuevoMensajeRecibido);
+                mensajeAgregado = true;
+                const aGuardar = JSON.stringify(jsonArchivo, null, 2)
+                fs.writeFile(rutaJsonUsuarios, aGuardar, (err) => {
+                    if (err) {
+                        console.log("linea 83Error:" + err)
+                        return res.status(500).json({ "Mensaje": "Error al guardar el archivo" })
+                    }
+                    console.log("Mensaje agregado")
+                    return res.status(200).json({ "Mensaje": "Mensaje agregado" });
+                })
+            }
+            if (usuario.email == mensaje.emisor) {
+                usuario.mensajes.enviados.push(nuevoMensajeEnviado);
+                const aGuardar2 = JSON.stringify(jsonArchivo, null, 2)
+                fs.writeFile(rutaJsonUsuarios, aGuardar2, (err) => {
+                    if (err) {
+                        console.log({ "Error": err })
+                    }
+                })
+            }
+        }
+
+        if (!mensajeAgregado) {
+            res.status(400).json({ "Mensaje": "Receptor no encontrado" })
+        }
+    })
+
+}
+
+const getChats = (req, res) => {
+    fs.readFile('./json/usuarios.json', 'utf8', (err, archivo) => {
+        let contactos = []
+        const arrayArchivo = JSON.parse(archivo)
+        arrayArchivo.forEach(element => {
+            const { mensajes, contraseña, ...nuevoObjeto } = element;
+            contactos.push(nuevoObjeto)
+        })
+        contactos.sort((a, b) => a.nombre.localeCompare(b.nombre))
+        const contactosFiltrado = contactos.filter(element => element.email != req.body.email)
+        res.json(contactosFiltrado)
+    })
+}
+
+const getUsers = (req, res) => {
+    res.status(200).json(usuarios)
+}
+
+const unreadMessages = (req, res) => {
+    const ruta = './json/usuarios.json';
+    const { email } = req.body;
+    fs.readFile(ruta, 'utf8', (err, archivo) => {
+        let emailEncontrado = false;
+        let contador = 0
+        const jsonArchivo = JSON.parse(archivo)
+        for (let usuario of jsonArchivo) {
+            if (usuario.email == email) {
+                emailEncontrado = true;
+                for (let mensaje of usuario.mensajes.recibidos) {
+                    if (mensaje.leido == false) {
+                        contador++
+                    }
+                }
+                res.status(200).json({ "mensajesNoLeidos": contador })
+            }
+        }
+
+        if (!emailEncontrado) {
+            res.status(400).json({ "Mensaje": "Email no coincide" })
+        }
+    })
+}
+
 
 module.exports = {
     register,
     login,
     middleCheck,
-    check
+    check,
+    send,
+    getChats,
+    unreadMessages,
+    getUsers
 }
